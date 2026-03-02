@@ -13,12 +13,9 @@ wheels/
 # Virtual environments
 .venv
 
-# Other specific files
-todo.md
+# Required config files
 .env
 config.toml
-logs.log
-tests/
-marks.json
-result.txt
-tree.txt
+
+# App output
+output/
