@@ -1,6 +1,6 @@
 <div align="center">
     <img src="assets/logo.png" style="width:25%">
-    <p style="font-size:2em">ligth_autobaka</p>
+    <h1>ligth_autobaka</h1>
 </div>
 
 **light_autobaka** is python util to automatically calculate average of each subject from ***Bakaláři***
@@ -12,7 +12,7 @@
 - use `uv` package manager
 
 ```bash
-https://github.com/bag1s3k/light_autobaka.git
+git clone https://github.com/bag1s3k/light_autobaka.git
 cd light_autobaka
 uv sync
 ```
