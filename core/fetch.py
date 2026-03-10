@@ -21,12 +21,12 @@ def _extract_data(soup: BeautifulSoup) -> Any:
         logger.error(error_script_not_found)
         raise DataExtractionError(error_script_not_found)
 
-    if (raw_data := re.search(r"\[\{.*?}]", raw_script.text, re.DOTALL)) is None:
+    if (mark_data := re.search(r"\[\{.*?}]", raw_script.text, re.DOTALL)) is None:
         error_something_different = "Script doesn't contain what we expect"
         logger.error(error_something_different)
         raise DataExtractionError(error_something_different)
 
-    if not (match := raw_data.group()):
+    if not (match := mark_data.group()):
         logger.warning("It seems that there aren't any marks")
 
     logger.info("Data successfully extracted")
@@ -34,9 +34,7 @@ def _extract_data(soup: BeautifulSoup) -> Any:
 
 def fetch_data(username: str, password: str) -> list["Mark"]:
     """
-    Fetch data from Bakalari website
-    You receive entire HTML source code and there's one script where u can find
-    everything what you need. Than JavaScript is converted to JSON style
+    Extracts mark data from a JSON object embedded in a script tag within the Bakalari HTML source.
 
     Returns:
         List[Mark]: List of parsed marks
@@ -48,15 +46,13 @@ def fetch_data(username: str, password: str) -> list["Mark"]:
 
     with requests.session() as s:
         if s.post(str(appconfig.server.login_url), data=payload).status_code != 200:
-            error_login_failed = "Login failed"
-            logging.critical(error_login_failed)
-            raise LoginError(error_login_failed)
+            logging.critical("Login failed")
+            raise LoginError("Login failed")
 
         r = s.get(str(appconfig.server.marks_url))
         if r.status_code != 200:
-            error_fetch_data = "Fetching data fails"
-            logging.critical(error_fetch_data)
-            raise FetchError(error_fetch_data)
+            logging.critical("Fetching data fails")
+            raise FetchError("Fetching data fails")
 
     soup = BeautifulSoup(r.content, "lxml")
     logger.info("Data fetched successfully")

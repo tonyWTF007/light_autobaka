@@ -5,7 +5,7 @@ logger = logging.getLogger(__name__)
 
 class Export:
     def __init__(self, data) -> None:
-        self.data: dict = self._isempty(data)
+        self.data: dict = self._ensure_data_exists(data)
 
     def fetched_data(self) -> None:
         """Export raw fetched data converted to JSON"""
@@ -25,7 +25,7 @@ class Export:
             logger.exception(e)
 
     def results(self) -> None:
-        """Export subject and it's average"""
+        """Export subject and its average"""
         if not self.data:
             return
         
@@ -43,7 +43,7 @@ class Export:
             logger.exception(e)
 
     @staticmethod
-    def _isempty(data: dict) -> dict:
+    def _ensure_data_exists(data: dict) -> dict:
         if not data:
             logger.warning(f"No data to export")
             return {}

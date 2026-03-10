@@ -40,3 +40,4 @@ uv run ./main.py
 
 ## Future features maybe
 - absence prediction
+- marks prediction
