@@ -1,4 +1,4 @@
-from core import initialize
+from core.bootstrap import initialize
 initialize()
 
 import logging

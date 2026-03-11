@@ -1,8 +1,7 @@
 import logging
-from typing import Annotated
 from datetime import datetime
 
-from pydantic import Field, BeforeValidator, BaseModel, model_validator, field_validator
+from pydantic import Field, BaseModel, model_validator, field_validator
 
 logger = logging.getLogger(__name__)
 
