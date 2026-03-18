@@ -19,3 +19,4 @@ config.toml
 
 # App output
 output/
+index.html

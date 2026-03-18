@@ -7,6 +7,7 @@ from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskPr
 
 from utils import ProgressConfig, display_results, Export
 from core import fetch_data, calc_marks
+from ui import create_html
 
 logger = logging.getLogger(__name__)
 
@@ -37,3 +38,4 @@ with Progress(
     progress_config.update_progress()
 
 display_results(average)
+create_html(average)
