@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 from collections import defaultdict
 
 if TYPE_CHECKING:
-    from utils import Mark
+    from utils.models.mark import Mark
 
 logger = logging.getLogger(__name__)
 

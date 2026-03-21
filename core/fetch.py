@@ -6,9 +6,11 @@ from typing import Any
 import requests
 from bs4 import BeautifulSoup
 
-from config import appconfig
-from utils import Mark, Export, login_details
+from config.set_config import appconfig
+from utils.models.mark import Mark
+from utils.models.env_vars import env_vars
 from core.exceptions import LoginError, FetchError, DataExtractionError
+from utils.constants import IS_GITHUB_ACTIONS
 
 logger = logging.getLogger(__name__)
 
@@ -39,8 +41,8 @@ def fetch_data() -> list["Mark"]:
         List[Mark]: List of parsed marks
     """
     payload = {
-        "username": login_details.username,
-        "password": login_details.password
+        "username": env_vars.username,
+        "password": env_vars.password
     }
 
     user_agent = {
@@ -66,6 +68,9 @@ def fetch_data() -> list["Mark"]:
     logger.info("Data fetched successfully")
 
     data = _extract_data(soup)
-    Export(data).fetched_data()
-    
+
+    if not IS_GITHUB_ACTIONS:
+        from utils.models.export import Export
+        Export(data).fetched_data()
+
     return [Mark(**raw_mark) for raw_mark in data]

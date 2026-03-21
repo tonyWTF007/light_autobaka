@@ -2,7 +2,7 @@ from pathlib import Path
 
 from pydantic import BaseModel, field_validator
 
-from utils import PROJECT_ROOT
+from utils.constants import PROJECT_ROOT
 
 class PathConfig(BaseModel):
     raw_marks: Path

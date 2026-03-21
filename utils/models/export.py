@@ -13,7 +13,7 @@ class Export:
         if not self.data:
             return
         
-        from config import appconfig
+        from config.set_config import appconfig
 
         try:
             with open(appconfig.path.raw_marks, "w", encoding="utf-8") as f:
@@ -30,7 +30,7 @@ class Export:
         if not self.data:
             return
         
-        from config import appconfig
+        from config.set_config import appconfig
 
         try:
             with open(appconfig.path.results, "w", encoding="utf-8") as f:

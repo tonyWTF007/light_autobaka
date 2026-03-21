@@ -12,3 +12,6 @@ class FetchError(BakaError):
 
 class DataExtractionError(BakaError):
     """Raised when data extraction from HTML fails"""
+
+class ConfigFileError(BakaError):
+    """Raised when there is no config file"""

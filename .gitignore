@@ -13,9 +13,12 @@ wheels/
 # Virtual environments
 .venv
 
-# Required config files
+# Required config files (Non-CI environment)
 .env
 config.toml
+
+# Required config files (CI environment)
+.secrets
 
 # App output
 output/
