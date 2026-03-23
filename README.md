@@ -17,26 +17,43 @@ cd light_autobaka
 uv sync
 ```
 
+## Usage
+
 ## Configuration
 
-- rename `.env.example` and write your own login credentials
-- rename `config.toml.example` and customize
-    - `base_url` = login url without **/login**
-    - `marks_endpoint` = url endpoint to marks in **chronological** view (Grade > Interim Grading > Chronological button)
+- `base_url` - login url without **/login**
+- `login_endpoint` - login page
+- `after_login_endpoint` - url after you login
+- `marks_endpoint` - url endpoint to marks in **chronological** view (Grade > Interim Grading > Chronological button)
 
-<p><img src="assets/screenshot_chronological.png" alt="Chronological button" style="width:100%;"/></p>
+<p align="center"><img src="assets/screenshot_chronological.png" alt="Chronological button" style="width:90%"/></p>
 
-## Run
+## Local Run
 
 ```bash
-uv run ./main.py
+uv run -m main
 ```
+
+## Github Actions + Pages
+1. Fork my repo
+2. Go to the `secrets` of repo
+3. Go to **GitHub Pages** settings and change source to **GitHub Actions**
+4. Go to **GitHub Actions** and anable them and activate **deploy.yml** workflow
+5. Create following variables:
+    - `USERNAME` - your bakalari username
+    - `PASSWORD` - your bakalari password
+    - `DATA` - configuration of app (instead `config.toml`), it's **json object**
+
+        ```json
+        {"base_url": "https://website.com", "login_endpoint": "login", "after_login_endpoint": "dashboard", "marks_endpoint": "next/prubzna.aspx?s=chrono"}
+        ```
 
 ## Output (default)
 
-- `marks` = raw marks data
-- `result.txt` = text output with calcuated averages
+- `marks` - raw marks data
+- `result.txt` - text output with calcuated averages
 - `logs.log`
+- `index.html` - only via **CI environment**
 
 ## Future features maybe
 - absence prediction
