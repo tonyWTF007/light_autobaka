@@ -6,29 +6,97 @@
     <title>{{ title }}</title>
     
     <style>
-        table, th, td {
-            border: 1px solid black;
+        body {
+            font-family: "Segoe UI";
+            background: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin: 0 0 25px 0;
+            font-size: 1.8rem;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid #eaeaea;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 400px;
         }
 
         th, td {
-            padding: 2px 5px;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        th {
+            background: #3498db;
+            color: #ffffff;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        tr:nth-child(even) {
+            background: #f1f5f9;
+            transition: background-color 0.2s ease;
+        }
+
+        .footer {
+            text-align: center;
+            margin: 25px 0 0 0;
+            font-size: 0.85em;
+            color: #7f8c8d;
         }
     </style>
 </head>
 <body>
-    <table>
-        <tr>
-            <th>Subject</th>
-            <th>Average</th>
-        </tr>
-        {% for subject, average in data.items() %}
-        <tr>
-            <td>{{ subject }}</td>
-            <td>{{ average }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    <div class="container">
+        <h1>{{ title }}</h1>
 
-    <p>Last updated: {{ last_update }}</p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Average</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for subject, average in data.items() %}
+                    <tr>
+                        <td>{{ subject }}</td>
+                        <td>{{ average }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <p class="footer">Last updated: {{ last_update }}</p>
 </body>
 </html>
