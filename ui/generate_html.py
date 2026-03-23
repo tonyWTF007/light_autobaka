@@ -1,6 +1,9 @@
 import logging
+from datetime import datetime
 
 from jinja2 import Template
+import pytz
+
 from config.set_config import appconfig
 
 logger = logging.getLogger(__name__)
@@ -18,6 +21,12 @@ def create_html(context: dict["str", float]) -> None:
     template = Template(template_html)
 
     with open(appconfig.path.html_output, "w", encoding="utf-8") as f:
-        f.write(template.render(data=context, title="Bakalari Averages"))
+        czech_tz = pytz.timezone("Europe/Prague")
+        html_content = template.render(
+            data=context,
+            title="Bakalari Averages",
+            last_update=datetime.now(tz=czech_tz).strftime("%Y-%m-%d %H:%M:%S")
+        )
+        f.write(html_content)
 
-    logger.debug("HTML file with results successfully generated")
+    logger.debug(f"HTML file create on path: {appconfig.path.html_output}")

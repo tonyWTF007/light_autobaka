@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from rich import box
 from rich.console import Console
 from rich.table import Table
@@ -16,7 +18,7 @@ def display_results(data: dict[str, float]) -> None:
     if not data:
         return
 
-    table = Table(box=box.SIMPLE)
+    table = Table(box=box.SIMPLE, caption=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     table.add_column("Subject")
     table.add_column("Average", style="cyan")
 
